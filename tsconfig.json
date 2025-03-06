@@ -1,0 +1,29 @@
+{
+  "files": [],
+  
+  
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+  
+}
+// {
+//     "compilerOptions": {
+//       "target": "ES5",
+//       "jsx": "react",
+//       "outDir": "./dist",  // Set output directory for compiled JavaScript files
+//       "allowJs": true,
+//       "moduleResolution": "node",
+//       "strict": true,
+//       "esModuleInterop": true,
+//       "skipLibCheck": true
+//     },
+//     "include": [
+//       "src/**/*"
+//     ],
+//     "exclude": [
+//       "node_modules",
+//       "dist"  // Exclude the output folder if needed
+//     ]
+//   }
