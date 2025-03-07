@@ -99,6 +99,7 @@ export const data = {
   
   export const BKS: Node = {
     name: "2025",
+    value:320,
     estimateTime:125,
     time: 125,
     children: [
@@ -363,7 +364,7 @@ export const data = {
             value: 3,
             estimateTime: 0,
             time: 0,
-            children: [{ name: "No task", value: 2, time: 0 }],
+            children: [{ name: "No task", value: 3, time: 0 }],
           },
           {
             name: "Ledning och uppföljning",
