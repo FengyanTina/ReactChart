@@ -2,14 +2,16 @@ import { useDroppable } from '@dnd-kit/core';
 import { TaskCard } from './TaskCard';
 import { Column as ColumnType, Task } from './types';
 import { Box, Typography } from '@mui/material';
+import { useState } from 'react';
 
 
 type ColumnProps = {
   column: ColumnType;
   tasks: Task[];
+  onTaskClick: (task: Task,) => void;
 };
 
-export function Column({ column, tasks }: ColumnProps) {
+export function Column({ column, tasks, onTaskClick}: ColumnProps) {
   const { setNodeRef } = useDroppable({
     id: column.id,
   });
@@ -18,7 +20,6 @@ export function Column({ column, tasks }: ColumnProps) {
     IN_PROGRESS: '#A8D08D', // Soft Green
     DONE: '#D3D3D3', // Soft Gray
   };
-
   return (
     <Box
       ref={setNodeRef}
@@ -45,7 +46,7 @@ export function Column({ column, tasks }: ColumnProps) {
         }}
       >
         {tasks.map((task) => (
-          <TaskCard  key={task.id} task={task} />
+          <TaskCard  key={task.id} task={task} handleTaskClick={onTaskClick}/>
         ))}
       </Box>
     </Box>
