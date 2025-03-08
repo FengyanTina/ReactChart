@@ -1,5 +1,5 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import "./App.css";
+// import "./App.css";
 
 import React, { useEffect, useState } from "react";
 import { BKS } from "./data";
@@ -12,6 +12,9 @@ import SyncHighlight from "./components/BarPie";
 import Test from "./components/test";
 import SunLayer from "./components/sunLayer";
 import StackOrderDemo from "./components/ProgressBar";
+import  SelectAllTransferList from "./components/SelectTransferList";
+import DragComponent from "./components/reacDrag/DragComponent";
+
 interface Node {
   name: string;
   value?: number;
@@ -159,6 +162,25 @@ function App() {
           }}>
             <StackOrderDemo/>
         </Box>
+        <Box 
+           sx={{
+            width: "100%",
+            height: "100%",
+            overflow: "hidden",
+            marginTop: 10, // Adjust margin for spacing between dropdown and chart
+          }}>
+           <DragComponent/>
+        </Box>
+        <Box 
+           sx={{
+            width: "100%",
+            height: "100%",
+            overflow: "hidden",
+            marginTop: 10, // Adjust margin for spacing between dropdown and chart
+          }}>
+            < SelectAllTransferList/>
+        </Box>
+        
     </>
   );
 }

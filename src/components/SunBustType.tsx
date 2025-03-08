@@ -77,54 +77,23 @@ const SunburstChartType: React.FC<SunburstChartTypeProps> = ({ task }) => {
 
 
 
-
-//   const findNodeDetails = (
-//     node: Node,
-//     target: string,
-//     parent: Node | null = null
-// ): { node: Node, parent: Node | null, children: Node[] } | null => {
-//     if (!node || !node.name) return null;
-
-//     console.log("Checking node:", node.name, "Target:", target);
-
-//     // Check if the current node's label matches the clicked label (using split logic)
-//     const nodeNameWithoutPrefix = node.name.split("-").pop();
-//     const targetWithoutPrefix = target.split("-").pop();
-
-//     if (nodeNameWithoutPrefix === targetWithoutPrefix) {
-//         console.log("Node found:", node);
-//         return { node, parent, children: node.children ?? [] }; // Ensure children are included
-//     }
-
-//     // If not found, recursively search children
-//     if (node.children && node.children.length > 0) {
-//         for (let child of node.children) {
-//             const result = findNodeDetails(child, target, node);
-//             if (result) {
-//                 console.log("Parent found:", parent);
-//                 return result; // Return the result if found
-//             }
-//         }
-//     }
-
-//     // Return null if node is not found in this branch
-//     return null;
-// };
-const findNodeDetails = (
+  
+  const findNodeDetails = (
     node: Node,
     target: string,
     parent: Node | null = null
 ): { node: Node, parent: Node | null, children: Node[] } | null => {
     if (!node || !node.name) return null;
 
-    // Normalize node name and target for comparison
-    const normalize = (str: string) => str.trim().toLowerCase(); // Remove spaces and convert to lowercase
-
     console.log("Checking node:", node.name, "Target:", target);
 
-    if (normalize(node.name) === normalize(target)) {
+    // Check if the current node's label matches the clicked label (using split logic)
+    const nodeNameWithoutPrefix = node.name.split("-").pop();
+    const targetWithoutPrefix = target.split("-").pop();
+
+    if (nodeNameWithoutPrefix === targetWithoutPrefix) {
         console.log("Node found:", node);
-        return { node, parent, children: node.children ?? [] };
+        return { node, parent, children: node.children ?? [] }; // Ensure children are included
     }
 
     // If not found, recursively search children
@@ -133,7 +102,7 @@ const findNodeDetails = (
             const result = findNodeDetails(child, target, node);
             if (result) {
                 console.log("Parent found:", parent);
-                return result;
+                return result; // Return the result if found
             }
         }
     }
@@ -142,28 +111,7 @@ const findNodeDetails = (
     return null;
 };
 
-
-const handleClick = (event: Readonly<Plotly.PlotMouseEvent>) => {
-    console.log("Click event triggered");
-    const { points } = event;
-    if (points && points[0]) {
-        console.log("Clicked point:", points[0]);
-        const clickedPoint = points[0] as SunburstDatum;
-        const clickedLabel = clickedPoint.label.trim(); // Ensure label is trimmed
-        console.log("Clicked label:", clickedLabel);
-
-        // Find the node details starting from the root (task)
-        const result = findNodeDetails(task, clickedLabel);
-
-        if (result) {
-            setSelectedNodeInfo(result);
-            console.log("Selected node info:", result);
-        } else {
-            console.log("No matching node found.");
-        }
-    }
-};
-// Handle Click
+// Handle Click show text and static chart
 // const handleClick = (event: Readonly<Plotly.PlotMouseEvent>) => {
 //     console.log("Click event triggered");
 //     const { points } = event;
@@ -185,37 +133,37 @@ const handleClick = (event: Readonly<Plotly.PlotMouseEvent>) => {
 //     }
 // };
 
-    
-    // const handleClick = (event: Readonly<Plotly.PlotMouseEvent>) => {
-    //     const { points } = event;
-    //     if (points && points[0]) {
-    //       const clickedPoint = points[0] as SunburstDatum;
-    //       const clickedLabel = clickedPoint.label;
+    // Handle Click with animation
+    const handleClick = (event: Readonly<Plotly.PlotMouseEvent>) => {
+        const { points } = event;
+        if (points && points[0]) {
+          const clickedPoint = points[0] as SunburstDatum;
+          const clickedLabel = clickedPoint.label;
       
-    //       // If the clicked label is the root (year), reset to the full dataset
-    //       if (clickedLabel === task.name) {
-    //         setChartData(transformData(task)); // Reset to full chart
-    //         return;
-    //       }
+          // If the clicked label is the root (year), reset to the full dataset
+          if (clickedLabel === task.name) {
+            setChartData(transformData(task)); // Reset to full chart
+            return;
+          }
       
-    //       // Function to find the clicked node
-    //       const findNode = (node: Node, target: string): Node | null => {
-    //         if (node.name === target) return node;
-    //         if (node.children) {
-    //           for (let child of node.children) {
-    //             const result = findNode(child, target);
-    //             if (result) return result;
-    //           }
-    //         }
-    //         return null;
-    //       };
+          // Function to find the clicked node
+          const findNode = (node: Node, target: string): Node | null => {
+            if (node.name === target) return node;
+            if (node.children) {
+              for (let child of node.children) {
+                const result = findNode(child, target);
+                if (result) return result;
+              }
+            }
+            return null;
+          };
       
-    //       const clickedNode = findNode(task, clickedLabel);
-    //       if (clickedNode && clickedNode.children) {
-    //         setChartData(transformData(clickedNode, clickedNode.name)); // Zoom into the selected section
-    //       }
-    //     }
-    //   };
+          const clickedNode = findNode(task, clickedLabel);
+          if (clickedNode && clickedNode.children) {
+            setChartData(transformData(clickedNode, clickedNode.name)); // Zoom into the selected section
+          }
+        }
+      };
       
     const renderChildren = (children: Node[]) => {
         return children.map((child: Node, index: number) => (
