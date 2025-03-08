@@ -116,6 +116,7 @@ const [highlightedItem, setHighLightedItem] = React.useState<HighlightItemData |
         onItemClick={handleClick}
         width={550}
         height={200}
+        
         //margin={{ right: 100 }}// push the pie futher to the left
         highlightedItem={highlightedItem}
         onHighlightChange={setHighLightedItem}

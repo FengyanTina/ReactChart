@@ -9,6 +9,9 @@ import MarginAndLabelPosition from "./components/Bar";
 import valueFormatter from "./components/BarWithLeg";
 import BarsDataset from "./components/BarWithLeg";
 import SyncHighlight from "./components/BarPie";
+import Test from "./components/test";
+import SunLayer from "./components/sunLayer";
+import StackOrderDemo from "./components/ProgressBar";
 interface Node {
   name: string;
   value?: number;
@@ -146,6 +149,15 @@ function App() {
             marginTop: 10, // Adjust margin for spacing between dropdown and chart
           }}>
             <SyncHighlight/>
+        </Box>
+        <Box 
+           sx={{
+            width: "100%",
+            height: "100%",
+            overflow: "hidden",
+            marginTop: 10, // Adjust margin for spacing between dropdown and chart
+          }}>
+            <StackOrderDemo/>
         </Box>
     </>
   );
