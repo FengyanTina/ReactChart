@@ -15,6 +15,7 @@ import StackOrderDemo from "./components/ProgressBar";
 import  SelectAllTransferList from "./components/SelectTransferList";
 import DragComponent from "./components/reacDrag/DragComponent";
 import DragDropTaskManager from "./components/htmlDrag/Dnd";
+import TaskInput from "./components/forms/TaskInputForm";
 
 interface Node {
   name: string;
@@ -76,15 +77,42 @@ function App() {
 
   return (
     <>
+    <Box>
+        <Box>
+            <TaskInput/>
+        </Box>
+     <Box 
+           sx={{
+            width: "100%",
+            height: "100%",
+            overflow: "hidden",
+            marginTop: 10, // Adjust margin for spacing between dropdown and chart
+          }}>
+            <StackOrderDemo/>
+        </Box>
+     </Box>
+
+        <Box 
+           sx={{
+            width: "100%",
+            height: "100%",
+            overflow: "hidden",
+            marginTop: 10, // Adjust margin for spacing between dropdown and chart
+            mb: 1
+          }}>
+           <DragDropTaskManager/>
+        </Box>
       <Box
         sx={{
           position: "relative", // This will ensure the dropdown is positioned relative to the Box
           height: "100%", // Ensure the Box takes up the available height
+          top: 60,
+          left: 60,
         }}
       >
         <FormControl
           fullWidth
-          sx={{ position: "absolute", top: 20, left: 20, width: 150, mb: 2 }}
+          sx={{ position: "absolute", top: 20,  width: 150, mb: 2 }}
         >
           <InputLabel>Välj Avdelning</InputLabel>
           <Select
@@ -107,7 +135,7 @@ function App() {
           width: "100%",
           height: "100%",
           overflow: "hidden",
-          marginTop:20, // Adjust margin for spacing between dropdown and chart
+          marginTop:10, 
         
         }}
       >
@@ -154,42 +182,8 @@ function App() {
           }}>
             
         </Box>
-        <Box 
-           sx={{
-            width: "100%",
-            height: "100%",
-            overflow: "hidden",
-            marginTop: 10, // Adjust margin for spacing between dropdown and chart
-          }}>
-            <StackOrderDemo/>
-        </Box>
-        <Box 
-           sx={{
-            width: "100%",
-            height: "100%",
-            overflow: "hidden",
-            marginTop: 10, // Adjust margin for spacing between dropdown and chart
-          }}>
-           <DragDropTaskManager/>
-        </Box>
-        <Box 
-           sx={{
-            width: "100%",
-            height: "100%",
-            overflow: "hidden",
-            marginTop: 10, // Adjust margin for spacing between dropdown and chart
-          }}>
-           <DragComponent/>
-        </Box>
-        <Box 
-           sx={{
-            width: "100%",
-            height: "100%",
-            overflow: "hidden",
-            marginTop: 10, // Adjust margin for spacing between dropdown and chart
-          }}>
-            < SelectAllTransferList/>
-        </Box>
+       
+        
         
     </>
   );
