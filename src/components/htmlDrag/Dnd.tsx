@@ -93,6 +93,7 @@ export default function DragDropTaskManager() {
   // Handle drag over (allows dropping)
   const handleDragOver = (event: React.DragEvent) => {
     event.preventDefault();
+    
   };
 
   // Handle drop
@@ -107,7 +108,29 @@ export default function DragDropTaskManager() {
       )
     );
   };
-  
+
+
+//   const handleDragStart = (event: React.DragEvent, task: Task) => {
+//     setDraggingItem(task);
+//     event.dataTransfer.setData("taskId", task.id);
+//   };
+
+//   // Handle drag over (allows dropping)
+//   const handleDragOver = (event: React.DragEvent) => {
+//     event.preventDefault();
+//   };
+
+//   // Handle drop
+//   const handleDrop = (newStatus: Task["status"]) => {
+//     if (draggingItem && draggingItem.status !== newStatus) {
+//       setTasks((prevTasks) =>
+//         prevTasks.map((task) =>
+//           task.id === draggingItem.id ? { ...task, status: newStatus } : task
+//         )
+//       );
+//     }
+//     setDraggingItem(null);
+//   };
 
   // Render each task list section
   const TaskList = ({
