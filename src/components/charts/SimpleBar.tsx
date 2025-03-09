@@ -1,3 +1,4 @@
+import { Paper } from "@mui/material";
 import React, { useState } from "react";
 
 // 定义状态类型
@@ -36,8 +37,8 @@ export const BarChart: React.FC<{ data: BarData[] }> = ({ data }) => {
         setTooltip({
           visible: true,
           content: `Task: ${item.task}, Status: ${item.status}`,
-          x: event.clientX,
-          y: event.clientY,
+          x: event.clientX + 10, // 水平偏移量
+          y: event.clientY + 10, // 垂直偏移量
         });
       };
     
@@ -50,14 +51,24 @@ export const BarChart: React.FC<{ data: BarData[] }> = ({ data }) => {
           y: 0,
         });
       };
+      const updateTooltipPosition = (event: React.MouseEvent) => {
+        if (tooltip.visible) {
+          setTooltip((prev) => ({
+            ...prev,
+            x: event.clientX + 10, // 水平偏移量
+            y: event.clientY + 10, // 垂直偏移量
+          }));
+        }
+      };
     return (
         <div
           style={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            position: "relative",
-          }}
+            position: "relative", // 用于定位 Tooltip
+        }}
+        onMouseMove={updateTooltipPosition} // 监听鼠标移动事件
         >
           {/* 图例 */}
           <div
@@ -147,21 +158,22 @@ export const BarChart: React.FC<{ data: BarData[] }> = ({ data }) => {
         March (2025)
       </div>
       {tooltip.visible && (
-        <div
+        <Paper
           style={{
-            position: "absolute",
-            left: tooltip.x , // 偏移量
-            top: tooltip.y , // 偏移量
-            backgroundColor: "rgba(118, 111, 111, 0.8)",
-            color: "#fff",
+            position: "fixed", // 使用 fixed 定位
+            left: tooltip.x, // 水平位置
+            top: tooltip.y, // 垂直位置
+            backgroundColor: "white",
+            color: "black",
             padding: "5px 10px",
             borderRadius: "4px",
             fontSize: "12px",
             pointerEvents: "none", // 防止 Tooltip 干扰鼠标事件
+            boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)", // 添加阴影
           }}
         >
           {tooltip.content}
-        </div>
+        </Paper>
       )}
         </div>
       );
