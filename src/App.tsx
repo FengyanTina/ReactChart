@@ -17,7 +17,7 @@ import DragComponent from "./components/reacDrag/DragComponent";
 import DragDropTaskManager from "./components/htmlDrag/Dnd";
 import TaskInput from "./components/forms/TaskInputForm";
 import StackOrderDemo from "./components/ProgressBar";
-import { BarChart } from "./components/charts/SimpleBar";
+import { BarChart, BarData } from "./components/charts/SimpleBar";
 // 定义状态类型
 type Status = "planning" | "doing" | "complete";
 
@@ -29,57 +29,43 @@ const statusColors: Record<Status, string> = {
 };
 
 // 定义数据
-interface BarData {
-  week: string;
-  value: number;
-  status: Status;
-}
+
 
 const data: BarData[] = [
-  { week: "01", value: 100, status: "planning" },
-  { week: "02", value: 100, status: "doing" },
-  { week: "03", value: 100, status: "complete" },
-  { week: "04", value: 100, status: "planning" },
-  { week: "05", value: 100, status: "doing" },
-  { week: "06", value: 100, status: "complete" },
-  { week: "07", value: 100, status: "planning" },
-  { week: "08", value: 100, status: "doing" },
-  { week: "09", value: 100, status: "complete" },
-  { week: "10", value: 100, status: "planning" },
-  { week: "11", value: 100, status: "doing" },
-  { week: "12", value: 100, status: "complete" },
-  { week: "13", value: 100, status: "planning" },
-  { week: "14", value: 100, status: "doing" },
-  { week: "15", value: 100, status: "complete" },
-  { week: "16", value: 100, status: "planning" },
-  { week: "17", value: 100, status: "doing" },
-  { week: "18", value: 100, status: "complete" },
-  { week: "19", value: 100, status: "planning" },
-  { week: "20", value: 100, status: "doing" },
-  { week: "21", value: 100, status: "complete" },
-  { week: "22", value: 100, status: "planning" },
-  { week: "23", value: 100, status: "doing" },
-  { week: "24", value: 100, status: "complete" },
-  { week: "25", value: 100, status: "planning" },
-  { week: "30", value: 100, status: "doing" },
-  { week: "35", value: 100, status: "complete" },
-  { week: "36", value: 100, status: "planning" },
-  { week: "37", value: 100, status: "doing" },
-  { week: "38", value: 100, status: "complete" },
-  { week: "39", value: 100, status: "planning" },
-  { week: "40", value: 100, status: "doing" },
-  { week: "41", value: 100, status: "complete" },
-  { week: "42", value: 100, status: "planning" },
-  { week: "43", value: 100, status: "doing" },
-  { week: "44", value: 100, status: "complete" },
-  { week: "45", value: 100, status: "planning" },
-  { week: "46", value: 100, status: "doing" },
-  { week: "47", value: 100, status: "complete" },
-  { week: "48", value: 100, status: "planning" },
-  { week: "49", value: 100, status: "doing" },
-  { week: "50", value: 100, status: "complete" },
-  { week: "51", value: 100, status: "planning" },
-  { week: "52", value: 100, status: "doing" },
+  { task: "01", value: 100, status: "planning" },
+  { task: "02", value: 100, status: "doing" },
+  { task: "03", value: 100, status: "complete" },
+  { task: "04", value: 100, status: "planning" },
+  { task: "05", value: 100, status: "doing" },
+  { task: "06", value: 100, status: "complete" },
+  { task: "07", value: 100, status: "planning" },
+  { task: "08", value: 100, status: "doing" },
+  { task: "09", value: 100, status: "complete" },
+  { task: "10", value: 100, status: "planning" },
+  { task: "11", value: 100, status: "doing" },
+  { task: "12", value: 100, status: "complete" },
+  { task: "13", value: 100, status: "planning" },
+  { task: "14", value: 100, status: "doing" },
+  { task: "15", value: 100, status: "complete" },
+  { task: "16", value: 100, status: "planning" },
+  { task: "17", value: 100, status: "doing" },
+  { task: "18", value: 100, status: "complete" },
+  {task: "19", value: 100, status: "planning" },
+  { task: "20", value: 100, status: "doing" },
+  { task: "21", value: 100, status: "complete" },
+  { task: "22", value: 100, status: "planning" },
+  { task: "23", value: 100, status: "doing" },
+  { task: "24", value: 100, status: "complete" },
+  { task: "25", value: 100, status: "planning" },
+  { task: "26", value: 100, status: "doing" },
+  { task: "27", value: 100, status: "complete" },
+  { task: "28", value: 100, status: "planning" },
+  { task: "29", value: 100, status: "doing" },
+  { task: "30", value: 100, status: "complete" },
+  { task: "31", value: 100, status: "planning" },
+  { task: "32", value: 100, status: "doing" },
+  { task: "33", value: 100, status: "complete" },
+ 
 ];
 interface Node {
   name: string;
