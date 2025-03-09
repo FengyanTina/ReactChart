@@ -14,6 +14,7 @@ import SunLayer from "./components/sunLayer";
 import StackOrderDemo from "./components/ProgressBar";
 import  SelectAllTransferList from "./components/SelectTransferList";
 import DragComponent from "./components/reacDrag/DragComponent";
+import DragDropTaskManager from "./components/htmlDrag/Dnd";
 
 interface Node {
   name: string;
@@ -161,6 +162,15 @@ function App() {
             marginTop: 10, // Adjust margin for spacing between dropdown and chart
           }}>
             <StackOrderDemo/>
+        </Box>
+        <Box 
+           sx={{
+            width: "100%",
+            height: "100%",
+            overflow: "hidden",
+            marginTop: 10, // Adjust margin for spacing between dropdown and chart
+          }}>
+           <DragDropTaskManager/>
         </Box>
         <Box 
            sx={{
