@@ -11,12 +11,76 @@ import BarsDataset from "./components/BarWithLeg";
 import SyncHighlight from "./components/BarPie";
 import Test from "./components/test";
 import SunLayer from "./components/sunLayer";
-import StackOrderDemo from "./components/ProgressBar";
-import  SelectAllTransferList from "./components/SelectTransferList";
+
+import SelectAllTransferList from "./components/SelectTransferList";
 import DragComponent from "./components/reacDrag/DragComponent";
 import DragDropTaskManager from "./components/htmlDrag/Dnd";
 import TaskInput from "./components/forms/TaskInputForm";
+import StackOrderDemo from "./components/ProgressBar";
+import { BarChart } from "./components/charts/SimpleBar";
+// 定义状态类型
+type Status = "planning" | "doing" | "complete";
 
+// 定义颜色
+const statusColors: Record<Status, string> = {
+  planning: '#8BB3FF', // Slightly darker blue
+  doing: '#92C57B', // Slightly darker green
+  complete: '#BDBDBD', // Slightly darker gray
+};
+
+// 定义数据
+interface BarData {
+  week: string;
+  value: number;
+  status: Status;
+}
+
+const data: BarData[] = [
+  { week: "01", value: 100, status: "planning" },
+  { week: "02", value: 100, status: "doing" },
+  { week: "03", value: 100, status: "complete" },
+  { week: "04", value: 100, status: "planning" },
+  { week: "05", value: 100, status: "doing" },
+  { week: "06", value: 100, status: "complete" },
+  { week: "07", value: 100, status: "planning" },
+  { week: "08", value: 100, status: "doing" },
+  { week: "09", value: 100, status: "complete" },
+  { week: "10", value: 100, status: "planning" },
+  { week: "11", value: 100, status: "doing" },
+  { week: "12", value: 100, status: "complete" },
+  { week: "13", value: 100, status: "planning" },
+  { week: "14", value: 100, status: "doing" },
+  { week: "15", value: 100, status: "complete" },
+  { week: "16", value: 100, status: "planning" },
+  { week: "17", value: 100, status: "doing" },
+  { week: "18", value: 100, status: "complete" },
+  { week: "19", value: 100, status: "planning" },
+  { week: "20", value: 100, status: "doing" },
+  { week: "21", value: 100, status: "complete" },
+  { week: "22", value: 100, status: "planning" },
+  { week: "23", value: 100, status: "doing" },
+  { week: "24", value: 100, status: "complete" },
+  { week: "25", value: 100, status: "planning" },
+  { week: "30", value: 100, status: "doing" },
+  { week: "35", value: 100, status: "complete" },
+  { week: "36", value: 100, status: "planning" },
+  { week: "37", value: 100, status: "doing" },
+  { week: "38", value: 100, status: "complete" },
+  { week: "39", value: 100, status: "planning" },
+  { week: "40", value: 100, status: "doing" },
+  { week: "41", value: 100, status: "complete" },
+  { week: "42", value: 100, status: "planning" },
+  { week: "43", value: 100, status: "doing" },
+  { week: "44", value: 100, status: "complete" },
+  { week: "45", value: 100, status: "planning" },
+  { week: "46", value: 100, status: "doing" },
+  { week: "47", value: 100, status: "complete" },
+  { week: "48", value: 100, status: "planning" },
+  { week: "49", value: 100, status: "doing" },
+  { week: "50", value: 100, status: "complete" },
+  { week: "51", value: 100, status: "planning" },
+  { week: "52", value: 100, status: "doing" },
+];
 interface Node {
   name: string;
   value?: number;
@@ -77,31 +141,47 @@ function App() {
 
   return (
     <>
-    <Box>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection:{
+            xs:'column',
+            sm:'column',
+            md:'row'
+        },
+          justifyContent: "center",
+          alignItems: "center",
+          alignContent: "center",
+          
+        }}
+      >
         <Box>
-            <TaskInput/>
+          <TaskInput />
         </Box>
-     <Box 
-           sx={{
+        <Box
+          sx={{
             width: "100%",
             height: "100%",
             overflow: "hidden",
-            marginTop: 10, // Adjust margin for spacing between dropdown and chart
-          }}>
-            <StackOrderDemo/>
-        </Box>
-     </Box>
+          }}
+        >
+           <BarChart data={data}/>
 
-        <Box 
-           sx={{
-            width: "100%",
-            height: "100%",
-            overflow: "hidden",
-            marginTop: 10, // Adjust margin for spacing between dropdown and chart
-            mb: 1
-          }}>
-           <DragDropTaskManager/>
+          <StackOrderDemo />
         </Box>
+      </Box>
+
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+          marginTop: 10, // Adjust margin for spacing between dropdown and chart
+          mb: 1,
+        }}
+      >
+        <DragDropTaskManager />
+      </Box>
       <Box
         sx={{
           position: "relative", // This will ensure the dropdown is positioned relative to the Box
@@ -112,7 +192,7 @@ function App() {
       >
         <FormControl
           fullWidth
-          sx={{ position: "absolute", top: 20,  width: 150, mb: 2 }}
+          sx={{ position: "absolute", top: 20, width: 150, mb: 2 }}
         >
           <InputLabel>Välj Avdelning</InputLabel>
           <Select
@@ -135,8 +215,7 @@ function App() {
           width: "100%",
           height: "100%",
           overflow: "hidden",
-          marginTop:10, 
-        
+          marginTop: 10,
         }}
       >
         <SunburstChartType
@@ -150,16 +229,16 @@ function App() {
           justifyContent: "space-around", // Space between the two charts
           alignItems: "center", // Align them vertically
           width: "100%", // Take full width
-          
         }}
       >
         <Box
-         sx={{
+          sx={{
             width: "100%",
             height: "100%",
             overflow: "hidden",
             marginTop: 10, // Adjust margin for spacing between dropdown and chart
-          }}>
+          }}
+        >
           <OnSeriesItemClick />
         </Box>
         <Box
@@ -167,24 +246,20 @@ function App() {
             width: "100%",
             height: "100%",
             overflow: "hidden",
-             // Adjust margin for spacing between dropdown and chart
+            // Adjust margin for spacing between dropdown and chart
           }}
         >
           <BarsDataset />
-        </Box> 
-      </Box>
-      <Box 
-           sx={{
-            width: "100%",
-            height: "100%",
-            overflow: "hidden",
-            marginTop: 10, // Adjust margin for spacing between dropdown and chart
-          }}>
-            
         </Box>
-       
-        
-        
+      </Box>
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          overflow: "hidden",
+          marginTop: 10, // Adjust margin for spacing between dropdown and chart
+        }}
+      ></Box>
     </>
   );
 }

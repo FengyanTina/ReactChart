@@ -74,7 +74,7 @@ const columnColors: Record<Task['status'], string> = {
     doing: '#A8D08D', // Soft Green
     complete: '#D3D3D3', // Soft Gray
   };
-  const taskColors: Record<Task['status'], string> = {
+  const statusColors: Record<Task['status'], string> = {
     planning: '#8BB3FF', // Slightly darker blue
     doing: '#92C57B', // Slightly darker green
     complete: '#BDBDBD', // Slightly darker gray
@@ -184,7 +184,7 @@ const [maxHeight, setMaxHeight] = useState(300);
               onDragStart={(event) => handleDragStart(event, task)}
               onClick={() =>handleTaskClick(task)} 
               sx={{
-                backgroundColor: draggingItem?.id === task.id ? '#d1e7ff' : taskColors[task.status],
+                backgroundColor: draggingItem?.id === task.id ? '#d1e7ff' : statusColors[task.status],
                 boxShadow: draggingItem?.id === task.id ? "0px 2px 10px rgba(0,0,0,0.2)" : "none",
                 p: 1,
                 my: 1,
