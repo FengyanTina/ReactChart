@@ -1,7 +1,13 @@
 import { useState } from "react";
 import type { Task, Column as ColumnType } from "./types";
 
-import { DndContext, DragEndEvent, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
+import {
+  DndContext,
+  DragEndEvent,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { Column } from "./Colum";
 import { Box, Divider, Typography } from "@mui/material";
 
@@ -15,26 +21,37 @@ const INITIAL_TASKS: Task[] = [
   {
     id: "1",
     title: "Research Project",
+    time:"2025-03-23",
     description: "Gather requirements and create initial documentation",
     status: "TODO",
   },
   {
     id: "2",
     title: "Design System",
+    time:"2025-03-19",
     description: "Create component library and design tokens",
     status: "TODO",
   },
   {
     id: "3",
     title: "API Integration",
+    time:"2025-03-20",
     description: "Implement REST API endpoints",
     status: "IN_PROGRESS",
   },
   {
     id: "4",
     title: "Testing",
+    time:"2025-03-20",
     description: "Write unit tests for core functionality",
     status: "DONE",
+  },
+  {
+    id: "5",
+    title: "Meeting",
+    time:"2025-03-25",
+    description: "Write unit tests for core functionality",
+    status: "TODO",
   },
 ];
 
@@ -72,6 +89,13 @@ export default function DragComponent() {
   }
   return (
     <Box sx={{ padding: 4 }}>
+      {/* Week Plan Title */}
+      <Typography variant="h5" sx={{ color: "#555", marginBottom: 2 }}>
+        Week Plan
+      </Typography>
+  
+  
+      {/* Flex container for the drag-and-drop columns and task detail panel */}
       <Box sx={{ display: "flex", gap: 4 }}>
         <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
           {COLUMNS.map((column) => (
@@ -83,36 +107,46 @@ export default function DragComponent() {
             />
           ))}
         </DndContext>
+  
         {/* Task Detail Panel on the Right Side */}
         <Box
           sx={{
-            width: "350px",
-            backgroundColor: "#F4F6F8",
-            borderLeft: "1px solid #E0E0E0",
+            display: "flex",
+            flexDirection: "column",
+            width: "350px", // Same width as the task detail panel
+           
+            
             padding: 2,
-            display: selectedTask ? "block" : "none",
           }}
         >
+              <Typography variant="body1" sx={{ color: "#555", marginBottom: 2 }}>
+          Task Detail
+        </Typography>
+          {/* Task Detail Content */}
+          <Box
+         
+        >
           {selectedTask ? (
-            <>
-              <Typography
-                variant="h5"
-                sx={{ fontWeight: "bold", marginBottom: 2 }}
-              >
+            <Box>
+              <Typography variant="body1" sx={{ fontWeight: "bold", marginBottom: 1 }}>
                 {selectedTask.title}
               </Typography>
+              <Typography variant="body1" sx={{ fontWeight: "bold", marginBottom: 1 }}>
+                {selectedTask.time}
+              </Typography>
               <Divider sx={{ marginBottom: 2 }} />
-              <Typography variant="body1" sx={{ color: "#555" }}>
+              <Typography variant="body2" sx={{ color: "#555" }}>
                 {selectedTask.description}
               </Typography>
-            </>
+            </Box>
           ) : (
             <Typography variant="body1" sx={{ color: "#555" }}>
               Click on a task to see details
             </Typography>
           )}
-        </Box>
+         </Box>
       </Box>
     </Box>
+  </Box>
   );
 }

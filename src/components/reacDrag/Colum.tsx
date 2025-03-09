@@ -39,10 +39,14 @@ export function Column({ column, tasks, onTaskClick}: ColumnProps) {
 
       <Box
         sx={{
+            
           display: 'flex',
           flexDirection: 'column',
           flex: 1,
           gap: 2, // equivalent to gap-4 (16px)
+          maxHeight: 600, // Set the max height of the container
+        //   overflowY: 'auto', // Enable vertical scrolling
+        //   overflowX: 'hidden',
         }}
       >
         {tasks.map((task) => (

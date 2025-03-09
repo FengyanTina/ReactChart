@@ -17,6 +17,8 @@ export function TaskCard({ task,handleTaskClick }: TaskCardProps) {
   const style = transform
     ? {
         transform: `translate(${transform.x}px, ${transform.y}px)`,
+        //  position: 'absolute', // Keep it positioned above other elements
+        // zIndex: isDragging ? 9999 : 'auto',
       }
     : undefined;
     
@@ -39,12 +41,21 @@ export function TaskCard({ task,handleTaskClick }: TaskCardProps) {
         },
         ...style,
         transition: "transform 0.1s ease-in-out", // Smooth transition for the transform effect
+        height: "50px", // Set fixed height for the card
+        display: "flex",
+        flexDirection: "column",
       }}
     >
-      <Typography variant="h6" sx={{ color: "#333" }}>
+      <Typography variant="body1" sx={{ color: "#333" ,fontWeight: 'bold'}}>
         {task.title}
       </Typography>
-      <Typography variant="body2" sx={{ marginTop: 1, color: "#777" }}>
+      <Typography variant="body1" sx={{ color: "#333" }}>
+        Dead line: {task.time}
+      </Typography>
+      <Typography variant="body2" sx={{ marginTop: 1, color: "#777",overflow: "hidden", // Hide text overflow
+          textOverflow: "ellipsis", // Add ellipsis for overflow text
+          whiteSpace: "nowrap", // Prevent wrapping, keep text in one line
+          display: "block", }}>
         {task.description}
       </Typography>
     </Box>
