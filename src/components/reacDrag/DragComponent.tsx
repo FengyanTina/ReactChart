@@ -123,9 +123,7 @@ export default function DragComponent() {
           Task Detail
         </Typography>
           {/* Task Detail Content */}
-          <Box
-         
-        >
+          <Box>
           {selectedTask ? (
             <Box>
               <Typography variant="body1" sx={{ fontWeight: "bold", marginBottom: 1 }}>

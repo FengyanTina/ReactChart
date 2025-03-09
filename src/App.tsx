@@ -152,7 +152,7 @@ function App() {
             overflow: "hidden",
             marginTop: 10, // Adjust margin for spacing between dropdown and chart
           }}>
-            <SyncHighlight/>
+            
         </Box>
         <Box 
            sx={{
